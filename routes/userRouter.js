@@ -9,13 +9,13 @@ const {
     updateUserByID,
 } = require('../controllers/userController')
 
-// /makanan/all
-router.get('/all', getAllUser)
-// /makanan/:id
+// user/all
+router.get('/', getAllUser)
+// user/:id
 router.get('/:id', getUserByID)
-// /makanan/:id
+// user/:id
 router.delete('/:id', deleteUserByID)
-// /makanan/:id
+// user/:id
 router.put('/:id', updateUserByID)
 
 module.exports = router

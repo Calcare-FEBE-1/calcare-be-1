@@ -10,12 +10,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nama_admin: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       email_admin: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       password_admin: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

@@ -10,7 +10,7 @@ const {
 } = require('../controllers/adminController')
 
 // /makanan/all
-router.get('/all', getAllAdmin)
+router.get('/', getAllAdmin)
 // /makanan/:id
 router.get('/:id', getAdminByID)
 // /makanan/:id

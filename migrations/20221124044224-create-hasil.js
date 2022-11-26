@@ -10,18 +10,23 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id_keranjang: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       total_kalori: {
+        allowNull: false,
         type: Sequelize.FLOAT
       },
       total_protein: {
+        allowNull: false,
         type: Sequelize.FLOAT
       },
       total_karbohidrat: {
+        allowNull: false,
         type: Sequelize.FLOAT
       },
       total_lemak: {
+        allowNull: false,
         type: Sequelize.FLOAT
       },
       createdAt: {
