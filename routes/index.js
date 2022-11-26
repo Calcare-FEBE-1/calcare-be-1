@@ -15,10 +15,10 @@ router.get("/", (req, res) => {
 router.get('/makanan', makananRouter)
 
 // User
-router.get('/user', userRouter)
+router.use('/user', userRouter)
 
 // admin
-router.get('/admin', adminRouter)
+router.use('/admin', adminRouter)
 
 // Register-login
 router.use('/auth-users', auths)

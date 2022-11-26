@@ -10,12 +10,26 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       adminId: {
-        type: Sequelize.INTEGER,
         allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "admins",
+            schema: "schema",
+          },
+          key: "id",
+        },
       },
       makananId: {
-        type: Sequelize.INTEGER,
         allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "makanans",
+            schema: "schema",
+          },
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,

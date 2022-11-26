@@ -12,21 +12,27 @@ module.exports = {
       },
       nama_makanan: {
         type: Sequelize.STRING,
+        allowNull: false
       },
       kalori: {
         type: Sequelize.FLOAT,
+        allowNull: false
       },
       protein: {
         type: Sequelize.FLOAT,
+        allowNull: false
       },
       lemak: {
         type: Sequelize.FLOAT,
+        allowNull: false
       },
       karbohidrat: {
         type: Sequelize.FLOAT,
+        allowNull: false
       },
       link_gambar: {
         type: Sequelize.TEXT,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

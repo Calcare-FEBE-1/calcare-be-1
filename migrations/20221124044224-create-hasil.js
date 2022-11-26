@@ -1,40 +1,52 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Hasils', {
+    await queryInterface.createTable("Hasils", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
-      id_keranjang: {
-        type: Sequelize.INTEGER
+      keranjangId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "keranjangs",
+            schema: "schema",
+          },
+          key: "id",
+        },
       },
       total_kalori: {
-        type: Sequelize.FLOAT
+        allowNull: false,
+        type: Sequelize.FLOAT,
       },
       total_protein: {
-        type: Sequelize.FLOAT
+        allowNull: false,
+        type: Sequelize.FLOAT,
       },
       total_karbohidrat: {
-        type: Sequelize.FLOAT
+        allowNull: false,
+        type: Sequelize.FLOAT,
       },
       total_lemak: {
-        type: Sequelize.FLOAT
+        allowNull: false,
+        type: Sequelize.FLOAT,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Hasils');
-  }
+    await queryInterface.dropTable("Hasils");
+  },
 };

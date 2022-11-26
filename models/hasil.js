@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Hasil.init({
-    id_keranjang: DataTypes.INTEGER,
+    keranjangId: DataTypes.INTEGER,
     total_kalori: DataTypes.FLOAT,
     total_protein: DataTypes.FLOAT,
     total_karbohidrat: DataTypes.FLOAT,

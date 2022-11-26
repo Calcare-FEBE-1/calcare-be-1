@@ -11,31 +11,31 @@ module.exports = {
       },
       nama: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       tinggi_badan: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: false
       },
       berat_badan: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: false
       },
       umur: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       jenis_kelamin: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
