@@ -1,10 +1,9 @@
 const models = require('../models');
 const { User } = models;
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const env = require('dotenv');
 const {res_error, res_success} = require('../Response')
-// env.config();
 
 const register = async (req, res) => {
     const { nama, email, password, tinggi_badan, berat_badan, umur, jenis_kelamin } = req.body;
@@ -30,19 +29,25 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const {email, password} = req.body
-        const user = await User.findOne({ email }).lean();
-
-        if(!user)  res_error(res, 400, "400 Bad Request", "Your username or password is invalid")
-
-        if(await bcrypt.compare(password, user.password)){
-         
-            
-            return res_success(res, 200, "200 OK", "You was login", token)
+        let { email, password } = req.body;
+        const existUseremail = await User.findOne({ where: { email:email} });
+        if (existUseremail !== null) {
+            let compare = bcrypt.compareSync(password, existUseremail.password);
+            if (compare) {
+                const tokenUser = {
+                    _id: existUseremail._id,
+                    role: "users",
+                };
+                // const createToken = generateToken(tokenUser);
+                res.status(200).send({ message: "welcome"});
+            } else {
+                res.send("invalid");
+            }
+        } else {
+            res.send("user is not exist");
         }
-
     } catch (error) {
-        if(error) res_error(res, 500, "500 Internal Server Error", error.message)
+        res.status(500).send({ err: error });
     }
 }
 
