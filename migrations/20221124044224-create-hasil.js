@@ -15,7 +15,7 @@ module.exports = {
         references: {
           model: {
             tableName: "keranjangs",
-            schema: "schema",
+            // schema: "calcare_dev",
           },
           key: "id",
         },
