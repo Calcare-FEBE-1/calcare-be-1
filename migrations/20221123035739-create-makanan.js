@@ -1,40 +1,37 @@
 "use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+  // Up untuk membuat database baru
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Users", {
+    await queryInterface.createTable("Makanans", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      nama: {
+      nama_makanan: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      email: {
-        type: Sequelize.STRING,
+      kalori: {
+        type: Sequelize.FLOAT,
         allowNull: false
       },
-      password: {
-        type: Sequelize.STRING,
+      protein: {
+        type: Sequelize.FLOAT,
         allowNull: false
       },
-      tinggi_badan: {
-        type: Sequelize.INTEGER,
+      lemak: {
+        type: Sequelize.FLOAT,
         allowNull: false
       },
-      berat_badan: {
-        type: Sequelize.INTEGER,
+      karbohidrat: {
+        type: Sequelize.FLOAT,
         allowNull: false
       },
-      umur: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      jenis_kelamin: {
-        type: Sequelize.STRING,
+      link_gambar: {
+        type: Sequelize.TEXT,
         allowNull: false
       },
       createdAt: {
@@ -47,7 +44,8 @@ module.exports = {
       },
     });
   },
+  // Down untuk menghapus database
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Users");
+    await queryInterface.dropTable("Makanans");
   },
 };
