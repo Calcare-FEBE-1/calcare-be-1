@@ -3,10 +3,10 @@ const { User } = models;
 // const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const env = require('dotenv');
-const {res_error, res_success} = require('../Response')
+// const { generateToken, verifyToken } = require("../helpers");
 
 const register = async (req, res) => {
-    const { nama, email, password, tinggi_badan, berat_badan, umur, jenis_kelamin } = req.body;
+    const { nama, email, password, tinggi_badan, berat_badan, umur, jenis_kelamin,aktivitas_fisik } = req.body;
     if(password !== password) return res.status(400).json({msg: "Password salah"});
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
@@ -18,7 +18,8 @@ const register = async (req, res) => {
             tinggi_badan: tinggi_badan,
             berat_badan:berat_badan,
             umur:umur,
-            jenis_kelamin:jenis_kelamin
+            jenis_kelamin:jenis_kelamin,
+            aktivitas_fisik:aktivitas_fisik
         });
         res.json({msg: "Register Berhasil"});
     } catch (error) {

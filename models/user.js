@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     tinggi_badan: DataTypes.INTEGER,
     berat_badan: DataTypes.INTEGER,
     umur: DataTypes.STRING,
+    aktivitas_fisik: DataTypes.STRING,
     jenis_kelamin: DataTypes.STRING
   }, {
     sequelize,
