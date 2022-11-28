@@ -7,15 +7,18 @@ const {
     getMakananByID,
     deleteMakananByID,
     updateMakananByID,
+    addMakanan,
 } = require('../controllers/makananController')
 
-// /makanan/all
-router.get('/all', getAllMakanan)
-// /makanan/:id
+// /makanans/add
+router.post('/add', addMakanan)
+// /makanans/
+router.get('/', getAllMakanan)
+// /makanans/:id
 router.get('/:id', getMakananByID)
-// /makanan/:id
+// /makanans/:id
 router.delete('/:id', deleteMakananByID)
-// /makanan/:id
+// /makanans/:id
 router.put('/:id', updateMakananByID)
 
 module.exports = router

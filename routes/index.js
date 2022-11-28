@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
   res.send("This is homepage");
 });
 // "/makanan"
-router.get('/makanan', makananRouter)
+router.use('/makanans', makananRouter)
 
 // User
 router.use('/user', userRouter)
