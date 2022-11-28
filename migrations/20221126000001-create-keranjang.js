@@ -2,39 +2,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Hasils", {
+    await queryInterface.createTable("Keranjangs", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      keranjangId: {
-        allowNull: false,
+      jmlh_makanan: {
+        type: Sequelize.INTEGER,
+      },
+      userId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: "keranjangs",
+            tableName: "users",
             // schema: "calcare_dev",
           },
           key: "id",
         },
-      },
-      total_kalori: {
         allowNull: false,
-        type: Sequelize.FLOAT,
       },
-      total_protein: {
+      makananId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "makanans",
+            // schema: "calcare_dev",
+          },
+          key: "id",
+        },
         allowNull: false,
-        type: Sequelize.FLOAT,
-      },
-      total_karbohidrat: {
-        allowNull: false,
-        type: Sequelize.FLOAT,
-      },
-      total_lemak: {
-        allowNull: false,
-        type: Sequelize.FLOAT,
       },
       createdAt: {
         allowNull: false,
@@ -47,6 +45,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Hasils");
+    await queryInterface.dropTable("Keranjangs");
   },
 };

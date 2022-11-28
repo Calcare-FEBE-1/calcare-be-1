@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 const models = require('../models');
 const { User } = models;
 
-const { login,register} = require(('../controllers/authController'))
+
+const {register} = require(('../controllers/authController'))
 
 // router.post("/login", login);
 router.post("/register", register);

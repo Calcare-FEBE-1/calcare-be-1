@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
         nama: "Puput",
         email: "puput@gmail.com",
         password: "12345",
-        tinggi_badan: "150",
+        tinggi_badan: 150,
         berat_badan: "50",
         umur:"21",
         jenis_kelamin : "perempuan",
@@ -40,12 +40,10 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-
     ]);
   },
 
-
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     queryInterface.bulkDelete("users", null, {});
-  }
+  },
 };
