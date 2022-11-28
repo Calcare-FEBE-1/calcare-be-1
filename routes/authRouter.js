@@ -6,6 +6,8 @@ const { User } = models;
 
 const {register} = require(('../controllers/authController'))
 
+const {register} = require(('../controllers/authController'))
+
 // router.post("/login", login);
 router.post("/register", register);
 
