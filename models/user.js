@@ -11,19 +11,22 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  User.init({
-    nama: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    tinggi_badan: DataTypes.INTEGER,
-    berat_badan: DataTypes.INTEGER,
-    umur: DataTypes.STRING,
-    aktivitas_fisik: DataTypes.STRING,
-    jenis_kelamin: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
+  User.init(
+    {
+      nama: DataTypes.STRING,
+      email: DataTypes.STRING,
+      password: DataTypes.STRING,
+      tinggi_badan: DataTypes.INTEGER,
+      berat_badan: DataTypes.INTEGER,
+      umur: DataTypes.STRING,
+      jenis_kelamin: DataTypes.STRING,
+      aktivitas_fisik: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "User",
+    }
+  );
 
   return User;
 };

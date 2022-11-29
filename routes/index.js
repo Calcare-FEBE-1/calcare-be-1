@@ -1,29 +1,32 @@
 const express = require("express");
 const router = express.Router();
 
-const makananRouter = require('./makananRouter')
-const userRouter = require('./userRouter')
-const adminRouter = require('./adminRouter')
-const auths = require('./authRouter');
-const hasilRouter = require('./hasilRouter')
+const makananRouter = require("./makananRouter");
+const userRouter = require("./userRouter");
+const adminRouter = require("./adminRouter");
+const authRouter = require("./authRouter");
+const hasilRouter = require("./hasilRouter");
 
 // localhots:3000
 router.get("/", (req, res) => {
   res.send("This is homepage");
 });
 // "/makanan"
-router.get('/makanan', makananRouter)
+router.use("/makanan", makananRouter);
 
-// User
-router.use('/user', userRouter)
+// "/user"
+router.use("/user", userRouter);
 
-// admin
-router.use('/admin', adminRouter)
+// "/admin"
+router.use("/admin", adminRouter);
 
-// Register-login
-router.use('/auth', auths)
 
-router.use('/hasil', hasilRouter)
+// "/auth"   --> Untuk login dan register
+router.use("/auth", authRouter);
 
-// Eksport router 
-module.exports = router
+
+// "/hasil"
+router.use("/hasil", hasilRouter);
+
+// Eksport router
+module.exports = router;

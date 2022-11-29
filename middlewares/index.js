@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "./.env" });
 const { SECRETKEY } = process.env;
 const generateToken = (data) => {
+
 	const token = jwt.sign({ data }, SECRETKEY, {
 		expiresIn: "1h",
 	});
@@ -88,3 +89,4 @@ module.exports = {
 	allowedAdmin: allowedAdmin,
 	allowedUser: allowedUser,
 };
+

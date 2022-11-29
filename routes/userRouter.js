@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+// Auth dan author
+const { verifyToken, allowedAdmin, allowedUser } = require('../middlewares')
 
 // Memanggil function dari direktori sebelah
 const {
@@ -10,12 +12,13 @@ const {
 } = require('../controllers/userController')
 
 // user/all
-router.get('/', getAllUser)
+router.get('/all', [verifyToken, allowedAdmin], getAllUser)
 // user/:id
-router.get('/:id', getUserByID)
+router.get('/:id', [verifyToken, allowedUser], getUserByID)
 // user/:id
-router.delete('/:id', deleteUserByID)
+router.put('/:id', [verifyToken, allowedUser], updateUserByID)
 // user/:id
-router.put('/:id', updateUserByID)
+// delete user dimatikan dulu
+// router.delete('/:id', [verifyToken, allowedUser], deleteUserByID)
 
 module.exports = router

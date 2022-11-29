@@ -31,26 +31,4 @@ router.post("/register", registerAdmin);
 router.post("/login", loginAdmin);
 
 
-// http://localhost:3000/auth/login
-// router.post("/login", (req, res) => {
-
-//     const token = jwt.sign(
-//       {
-//         id: Admin,
-//       },
-//       KEY
-//     );
-  
-//     if (Admin) {
-//       res.json({
-//         message: "success login Admin",
-//         token,
-//       });
-//     }  else {
-//         res.status(401).json({
-//           message: "email or password are incorrect",
-//         });
-//       }
-//     });
-    
 module.exports = router
