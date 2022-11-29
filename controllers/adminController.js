@@ -1,10 +1,12 @@
 const models = require("../models");
 const { Admin } = models;
-const bcrypt = require("bcryptjs");
-// const jwt = require('jsonwebtoken');
-const env = require("dotenv");
-// const { generateToken, verifyToken } = require("../helpers");
-const { res_error, res_success } = require("../Response");
+
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const env = require('dotenv');
+const { generateToken, verifyToken } = require("../middlewares");
+const {res_error, res_success} = require('../Response')
+
 
 module.exports = {
   getAllAdmin: async (req, res) => {
@@ -72,36 +74,22 @@ module.exports = {
 
   loginAdmin: async (req, res) => {
     try {
-      // Membuat token admin untuk authorize 
-      const token = jwt.sign(
-        {
-          id: Admin,
-        },
-        KEY
-      );
 
-      if (Admin) {
-        res.json({
-          message: "success login Admin",
-          token,
-        });
-      } else {
-        res.status(401).json({
-          message: "email or password are incorrect",
-        });
-      }
+        let { email_admin, password_admin } = req.body;
+        const existAdminemail = await Admin.findOne({ where: { email_admin:email_admin} });
+        if (existAdminemail !== null) {
+            let compare = bcrypt.compareSync(password_admin, existAdminemail.password_admin);
+            if (compare) {
+                 const tokenAdmin = {
+                        _id: existAdminemail._id,
+                        role: "admin"
+                    }
+                    const createToken = generateToken(tokenAdmin)
+                    res.status(200).send({message: "welcome", token: createToken})
+            } else {
+                res.send("invalid");
+            }
 
-      let { email_admin, password_admin } = req.body;
-      const existAdminemail = await Admin.findOne({ where: { email_admin: email_admin } });
-      if (existAdminemail !== null) {
-        let compare = bcrypt.compareSync(password_admin, existAdminemail.password_admin);
-        if (compare) {
-          const tokenUser = {
-            _id: existAdminemail._id,
-            role: "admins",
-          };
-          // const createToken = generateToken(tokenUser);
-          res.status(200).send({ message: "welcome to" });
         } else {
           res.send("invalid");
         }

@@ -1,11 +1,11 @@
 const models = require("../models");
 const { User } = models;
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const env = require("dotenv");
-// const { generateToken, verifyToken } = require("../helpers");
 
-const KEY = "asdfjsdaklf234234";
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const env = require('dotenv');
+const { generateToken, verifyToken } = require("../middlewares");
+
 
 // untuk register user baru yang belum pernah login / register
 const registerUser = async (req, res) => {
