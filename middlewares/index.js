@@ -8,6 +8,7 @@ const generateToken = (data) => {
   return token;
 };
 const verifyToken = (req, res, next) => {
+  console.log("Ini jalan");
   res.send("Disini untuk verif token");
   next();
 };

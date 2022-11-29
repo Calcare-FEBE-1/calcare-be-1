@@ -6,6 +6,7 @@ const userRouter = require("./userRouter");
 const adminRouter = require("./adminRouter");
 const authRouter = require("./authRouter");
 const hasilRouter = require("./hasilRouter");
+const keranjangRouter = require("./keranjangRouter");
 
 // localhots:3000
 router.get("/", (req, res) => {
@@ -25,6 +26,9 @@ router.use("/auth", authRouter);
 
 // "/hasil"
 router.use("/hasil", hasilRouter);
+
+// "/keranjang"
+router.use("/keranjang", keranjangRouter);
 
 // Eksport router
 module.exports = router;
