@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const models = require('../models');
-const { Admin } = models;
+// const { Admin } = models;
 const jwt = require("jsonwebtoken");
 // const Admins = require("../models/admin");
 
-const KEY = "asdfjsdaklf234234";
+// const KEY = "asdfjsdaklf234234";
 
 // Memanggil function dari direktori sebelah
 const {

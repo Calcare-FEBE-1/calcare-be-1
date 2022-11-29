@@ -20,8 +20,10 @@ router.use("/user", userRouter);
 // "/admin"
 router.use("/admin", adminRouter);
 
+
 // "/auth"   --> Untuk login dan register
 router.use("/auth", authRouter);
+
 
 // "/hasil"
 router.use("/hasil", hasilRouter);
