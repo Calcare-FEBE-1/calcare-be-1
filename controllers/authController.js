@@ -1,9 +1,9 @@
 const models = require('../models');
 const { User } = models;
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const env = require('dotenv');
-// const { generateToken, verifyToken } = require("../helpers");
+const { generateToken, verifyToken } = require("../middlewares");
 
 const register = async (req, res) => {
     const { nama, email, password, tinggi_badan, berat_badan, umur, jenis_kelamin,aktivitas_fisik } = req.body;
@@ -37,10 +37,10 @@ const login = async (req, res) => {
             if (compare) {
                 const tokenUser = {
                     _id: existUseremail._id,
-                    role: "users",
+                    role: "user",
                 };
-                // const createToken = generateToken(tokenUser);
-                res.status(200).send({ message: "welcome"});
+                const createToken = generateToken(tokenUser);
+                res.status(200).send({ message: "welcome", token: createToken});
             } else {
                 res.send("invalid");
             }

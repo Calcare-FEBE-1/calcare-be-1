@@ -1,9 +1,9 @@
 const models = require('../models');
 const { Admin } = models;
 const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const env = require('dotenv');
-// const { generateToken, verifyToken } = require("../helpers");
+const { generateToken, verifyToken } = require("../middlewares");
 const {res_error, res_success} = require('../Response')
 
 module.exports = {
@@ -79,12 +79,12 @@ module.exports = {
         if (existAdminemail !== null) {
             let compare = bcrypt.compareSync(password_admin, existAdminemail.password_admin);
             if (compare) {
-                const tokenUser = {
-                    _id: existAdminemail._id,
-                    role: "admins",
-                };
-                // const createToken = generateToken(tokenUser);
-                res.status(200).send({ message: "welcome to"});
+                 const tokenAdmin = {
+                        _id: existAdminemail._id,
+                        role: "admin"
+                    }
+                    const createToken = generateToken(tokenAdmin)
+                    res.status(200).send({message: "welcome", token: createToken})
             } else {
                 res.send("invalid");
             }

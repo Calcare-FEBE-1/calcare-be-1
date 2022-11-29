@@ -21,7 +21,7 @@ router.use('/user', userRouter)
 router.use('/admin', adminRouter)
 
 // Register-login
-router.use('/auth-users', auths)
+router.use('/auth', auths)
 
 router.use('/hasil', hasilRouter)
 
