@@ -1,43 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const jwt = require("jsonwebtoken");
-const models = require('../models');
-const { User } = models;
+const { registerUser, loginUser } = require("../controllers/authController");
 
+// http://localhost:3000/auth/register
+router.post("/register", registerUser);
 
-const {register} = require(('../controllers/authController'))
-
-// router.post("/login", login);
-router.post("/register", register);
-
-
-// ini aku matiin karena pas masukin email dan password yang salah masih tetep masuk ga ngedetek eror terussss
-const KEY = "asdfjsdaklf234234";
-
-// http://localhost:3000/auth/loginyz
-router.post("/login", (req, res) => {
-try {
-    const token = jwt.sign(
-        {
-          id: User,
-        },
-        KEY
-      );
-    
-      if (User) {
-        res.json({
-          message: "success login User",
-          token,
-        });
-      }  else {
-        res.send("invalid");
-      } 
-    
-}  catch (error) {
-    res.status(500).send({ err: error });
-}
-    
-});
-
+// http://localhost:3000/auth/login
+router.post("/login", loginUser);
 
 module.exports = router;
