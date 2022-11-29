@@ -1,9 +1,8 @@
-const { restart } = require("nodemon");
 const models = require("../models");
-const makanan = require("../models/makanan");
-const { Makanan } = models;
-// const { Makanan } = require("../models/makanan");
+const { Makanan, Keranjang, User } = models;
+
 module.exports = {
+  // nambahin makanan oleh admin
   addMakanan: async (req, res) => {
     try {
       const newMakanan = await Makanan.create(req.body);
@@ -36,14 +35,28 @@ module.exports = {
     const { id } = req.params;
     try {
       const makanan = await Makanan.findOne({ where: { id: id } });
-      makanan !== null
-        ? res.status(200).json({
-            msg: "Dapat 1 makanan",
-            data: makanan,
-          })
-        : res.status(404).json({
-            msg: `Makanan tidak ditemukan`,
-          });
+      // const user = User.
+      if (makanan) {
+        console.log("makanan :", makanan);
+        Keranjang.create({
+          jmlh_makanan: 1,
+          userId: id,
+          makananId: id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+        res.send("Berhasil menambahkan makanan ke keranjang")
+      } else {
+        console.log("Error");
+      }
+      // makanan !== null
+      //   ? res.status(200).json({
+      //       msg: "Dapat 1 makanan",
+      //       data: makanan,
+      //     })
+      //   : res.status(404).json({
+      //       msg: `Makanan tidak ditemukan`,
+      //     });
     } catch (error) {
       res.status(404).send({ msg: error });
       console.log(error);

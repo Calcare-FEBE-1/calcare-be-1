@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
-// Memanggil function dari direktori sebelah
+// Auth dan author
+const { verifyToken, allowedUser, allowedAdmin } = require('../middlewares')
+// Memanggil function dari direktori makananController
 const {
     getAllMakanan,
     getMakananByID,
@@ -10,15 +11,15 @@ const {
     addMakanan,
 } = require('../controllers/makananController')
 
-// /makanans/add
-router.post('/add', addMakanan)
-// /makanans/
-router.get('/', getAllMakanan)
-// /makanans/:id
+// /makanan/add
+router.post('/add', [verifyToken, allowedAdmin],addMakanan)
+// /makanan
+router.get('/', [verifyToken, allowedUser], getAllMakanan)
+// /makanan/:id
 router.get('/:id', getMakananByID)
-// /makanans/:id
-router.delete('/:id', deleteMakananByID)
-// /makanans/:id
-router.put('/:id', updateMakananByID)
+// /makanan/:id
+router.put('/:id',[verifyToken, allowedAdmin], updateMakananByID)
+// /makanan/:id
+router.delete('/:id',[verifyToken, allowedAdmin], deleteMakananByID)
 
 module.exports = router
