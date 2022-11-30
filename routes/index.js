@@ -10,27 +10,19 @@ const keranjangRouter = require("./keranjangRouter");
 
 // localhots:3000
 router.get("/", (req, res) => {
-  res.send("This is homepage");
+  res.send("Welcome to Calcare Homepage");
 });
-// "/makanan"
-router.use("/makanan", makananRouter);
-
-// "/user"
-router.use("/user", userRouter);
-
-// "/admin"
-router.use("/admin", adminRouter);
-
-
 // "/auth"   --> Untuk login dan register
 router.use("/auth", authRouter);
-
-
+// "/user"
+router.use("/user", userRouter);
+// "/admin"
+router.use("/admin", adminRouter);
+// "/makanan"
+router.use("/makanan", makananRouter);
+// "/keranjang"
+router.use("/keranjang", keranjangRouter);
 // "/hasil"
 router.use("/hasil", hasilRouter);
 
-// "/keranjang"
-router.use("/keranjang", keranjangRouter);
-
-// Eksport router
 module.exports = router;

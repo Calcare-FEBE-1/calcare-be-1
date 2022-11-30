@@ -13,7 +13,7 @@ const {
     getAdminByID,
     deleteAdminByID,
     updateAdminByID,
-    registerAdmin,
+    addAdmin,
     loginAdmin,
 } = require('../controllers/adminController')
 
@@ -26,7 +26,7 @@ router.delete('/:id', deleteAdminByID)
 // /admin/:id
 router.put('/:id', updateAdminByID)
 //register Admin
-router.post("/register", registerAdmin);
+router.post("/add", addAdmin);
 // login admin
 router.post("/login", loginAdmin);
 
