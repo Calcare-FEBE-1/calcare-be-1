@@ -1,21 +1,20 @@
 const express = require("express");
 const router = express.Router();
-
-// Memanggil function dari direktori sebelah
 const {
     getAllHasil,
     getHasilByID,
     deleteHasilByID,
     updateHasilByID,
-} = require('../controllers/hasilController')
+} = require('../controllers/hasilController');
+const { verifyToken, allowedUser } = require("../middlewares");
 
 // /makanan/all
-router.get('/all', getAllHasil)
+router.get('/all',[verifyToken, allowedUser], getAllHasil)
 // /makanan/:id
-router.get('/:id', getHasilByID)
+router.get('/:id',[verifyToken, allowedUser], getHasilByID)
 // /makanan/:id
-router.delete('/:id', deleteHasilByID)
+// router.delete('/:id',[verifyToken, allowedUser], deleteHasilByID)
 // /makanan/:id
-router.put('/:id', updateHasilByID)
+router.put('/:id',[verifyToken, allowedUser], updateHasilByID)
 
 module.exports = router
