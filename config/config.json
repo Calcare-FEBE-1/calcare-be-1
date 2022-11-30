@@ -15,9 +15,10 @@
   },
   "production": {
     "username": "root",
-    "password": "12345678",
-    "database": "calcare_production",
-    "host": "https://eight-eye-production.up.railway.app/",
+    "password": "62Vpsy2SFLUIt1orZDfC",
+    "database": "railway",
+    "port": 7579,
+    "host": "containers-us-west-90.railway.app",
     "dialect": "mysql"
   }
 }

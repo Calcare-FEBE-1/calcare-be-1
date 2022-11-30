@@ -4,18 +4,18 @@ const DBconnection = require("./config/config.json");
 const allRoutes = require("./routes");
 const PORT = process.env.PORT || 3000;
 const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize("calcare_dev", "root", "12345678", {
-  host: "127.0.0.1",
-  dialect: "mysql",
-});
+// const sequelize = new Sequelize("calcare_dev", "root", "12345678", {
+//   host: "127.0.0.1",
+//   dialect: "mysql",
+// });
 
 // Connect to DB
-try {
-  sequelize.authenticate(DBconnection);
-  console.log("Connection has been established successfully.");
-} catch (error) {
-  console.error("Unable to connect to the database:", error);
-}
+// try {
+//   sequelize.authenticate();
+//   console.log("Connection has been established successfully.");
+// } catch (error) {
+//   console.error("Unable to connect to the database:", error);
+// }
 
 // Middleware
 app.use(express.json());
