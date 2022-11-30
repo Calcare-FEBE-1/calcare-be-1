@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const DBconnection = require("./config/config.json");
 const allRoutes = require("./routes");
-const { } = process.env || 3000;
+const PORT = process.env.PORT || 3000;
 const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize("calcare_dev", "root", "12345678", {
   host: "127.0.0.1",
