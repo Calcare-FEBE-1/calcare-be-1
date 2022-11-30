@@ -15,9 +15,10 @@
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "password": "12345678",
+    "database": "calcare_dev",
+    "host": "https://eight-eye-production.up.railway.app/",
     "dialect": "mysql"
   }
 }
+
