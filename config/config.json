@@ -16,9 +16,8 @@
   "production": {
     "username": "root",
     "password": "12345678",
-    "database": "calcare_dev",
+    "database": "calcare_production",
     "host": "https://eight-eye-production.up.railway.app/",
     "dialect": "mysql"
   }
 }
-
