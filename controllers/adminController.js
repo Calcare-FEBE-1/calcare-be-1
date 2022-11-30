@@ -1,9 +1,9 @@
 const models = require("../models");
 const { Admin } = models;
 require("dotenv").config();
-const { SECRET_KEY } = process.env;
 // Token
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
+const { generateToken } = require("../middlewares");
 const saltRounds = 10;
 const bcrypt = require("bcryptjs");
 
@@ -11,7 +11,7 @@ module.exports = {
   // Menambahkan admin oleh admin lain
   addAdmin: async (req, res) => {
     const { nama_admin, email_admin, password_admin } = req.body;
-    const salt = await bcrypt.genSalt();
+    const salt = await bcrypt.genSalt(saltRounds);
     const hashPassword = await bcrypt.hash(password_admin, salt);
     try {
       // Inser ke DB table admins
@@ -28,6 +28,42 @@ module.exports = {
         msg: "Internal Server Error",
       });
       console.log("Ada error nih: ", error);
+    }
+  },
+  // Login sebagai admin
+  loginAdmin: async (req, res) => {
+    try {
+      const { email_admin, password_admin } = req.body;
+      // Cek email
+      const isAdminExist = await Admin.findOne({ where: { email_admin: email_admin } });
+      if (isAdminExist) {
+        const compare = bcrypt.compareSync(password_admin, isAdminExist.password_admin);
+        if (compare) {
+          // Membuat token untuk authorization
+          const tokenAdmin = {
+            id: Admin.id,
+            email: Admin.email_admin,
+            role: "admin",
+          };
+          const createToken = generateToken(tokenAdmin);
+          res.status(200).json({
+            message: "Success login as Admin",
+            role: "admin",
+            token: createToken,
+          });
+          console.log("Success login as Admin");
+        } else {
+          res.status(401).json({
+            msg: "Your email or password are incorrect",
+          });
+        }
+      } else {
+        res.status(404).json({
+          msg: "User not found",
+        });
+      }
+    } catch (error) {
+      res.status(500).send({ error: error });
     }
   },
   getAllAdmin: async (req, res) => {
@@ -84,44 +120,6 @@ module.exports = {
       res.status(500).json({
         error: error,
       });
-    }
-  },
-  // Login sebagai admin
-  loginAdmin: async (req, res) => {
-    const { email_admin, password_admin } = req.body;
-    try {
-      // Cek email
-      const isAdminExist = await Admin.findOne({ where: { email_admin: email_admin } });
-      if (isAdminExist) {
-        const compare = bcrypt.compareSync(password_admin, isAdminExist.password_admin);
-        if (compare) {
-          // Membuat token untuk authorization
-          const token = jwt.sign(
-            {
-              id: Admin.id,
-              email: Admin.email_admin,
-            },
-            SECRET_KEY,
-            { expiresIn: "1h" }
-          );
-          res.status(200).json({
-            message: "Success login as Admin",
-            role: "admin",
-            token,
-          });
-          console.log("Success login as Admin");
-        } else {
-          res.status(401).json({
-            msg: "Your email or password are incorrect",
-          });
-        }
-      } else {
-        res.status(404).json({
-          msg: "User not found",
-        });
-      }
-    } catch (error) {
-      res.status(500).send({ error: error });
     }
   },
 };

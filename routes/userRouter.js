@@ -11,13 +11,13 @@ const {
     updateUserByID,
 } = require('../controllers/userController')
 
-// user/all
+//user/all
 router.get('/all', [verifyToken, allowedAdmin], getAllUser)
-// user/:id
+//user/:id
 router.get('/:id', [verifyToken, allowedUser], getUserByID)
-// user/:id
+//user/:id
 router.put('/:id', [verifyToken, allowedUser], updateUserByID)
-// user/:id
+//user/:id
 // delete user dimatikan dulu
 // router.delete('/:id', [verifyToken, allowedUser], deleteUserByID)
 

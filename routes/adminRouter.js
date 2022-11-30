@@ -1,34 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const models = require('../models');
-// const { Admin } = models;
-const jwt = require("jsonwebtoken");
-// const Admins = require("../models/admin");
+const { getAllAdmin, getAdminByID, deleteAdminByID, updateAdminByID, addAdmin, loginAdmin } = require("../controllers/adminController");
+const { verifyToken, allowedAdmin } = require("../middlewares");
 
-// const KEY = "asdfjsdaklf234234";
-
-// Memanggil function dari direktori sebelah
-const {
-    getAllAdmin,
-    getAdminByID,
-    deleteAdminByID,
-    updateAdminByID,
-    addAdmin,
-    loginAdmin,
-} = require('../controllers/adminController')
-
-// /admin/all
-router.get('/', getAllAdmin)
-// /admin/:id
-router.get('/:id', getAdminByID)
-// /admin/:id
-router.delete('/:id', deleteAdminByID)
-// /admin/:id
-router.put('/:id', updateAdminByID)
+//admin/all
+router.get("/", [verifyToken, allowedAdmin], getAllAdmin);
+//admin/:id
+router.get("/:id", [verifyToken, allowedAdmin], getAdminByID);
+//admin/:id
+router.delete("/:id", [verifyToken, allowedAdmin], deleteAdminByID);
+//admin/:id
+router.put("/:id", [verifyToken, allowedAdmin], updateAdminByID);
 //register Admin
-router.post("/add", addAdmin);
-// login admin
+router.post("/add", [verifyToken, allowedAdmin], addAdmin);
+//login admin
 router.post("/login", loginAdmin);
 
-
-module.exports = router
+module.exports = router;

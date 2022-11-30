@@ -5,10 +5,11 @@ const { verifyToken, allowedAdmin, allowedUser } = require("../middlewares");
 
 const { getAllKeranjang, getKeranjangByUserID } = require("../controllers/keranjangController");
 
-// "/keranjang"
-router.get("/", getAllKeranjang);
-// "/keranjang/:id"
+//keranjang
+router.get("/", [verifyToken, allowedUser], getAllKeranjang);
+//keranjang/:id
 // router.get("/:id", [verifyToken, allowedUser], getKeranjangByID);
-router.get("/:id", getKeranjangByUserID);
+//keranjang/:id
+router.get("/:id", [verifyToken, allowedUser], getKeranjangByUserID);
 
 module.exports = router;
