@@ -1,6 +1,6 @@
-const { OAuthClient, OAuth2Client } = require("google-auth-library");
+// const { OAuthClient, OAuth2Client } = require("google-auth-library");
 
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, "postmessage");
+// const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, "postmessage");
 
 exports.UserInfo = async (googleUser) => {
   const res = await client.getToken(googleUser);

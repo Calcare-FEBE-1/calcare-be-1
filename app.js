@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(allRoutes);
 
-// Menampilkan Koneksi Server 
+// Menampilkan Koneksi Server
 app.listen(PORT, () => {
-  console.log("Server is running");
+  console.log(`Calcare-febe-1 server is running at port http://localhost:${PORT}`);
 });
