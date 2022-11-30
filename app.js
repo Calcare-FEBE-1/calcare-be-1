@@ -3,7 +3,7 @@ const app = express();
 const DBconnection = require("./config/config.json");
 const allRoutes = require("./routes");
 const PORT = process.env.PORT || 3000;
-const Sequelize = require("Sequelize");
+const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize("calcare_dev", "root", "12345678", {
   host: "127.0.0.1",
   dialect: "mysql",
