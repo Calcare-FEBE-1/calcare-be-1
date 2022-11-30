@@ -16,8 +16,8 @@ router.post("/register", registerUser);
 
 
 router.post("/google", UsersController.loginByGoogle);
-router.post("/login", login);
-router.post("/register", register);
+router.post("/login", loginUser);
+
 
 
 

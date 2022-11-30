@@ -89,10 +89,6 @@ module.exports = {
             } else {
                 res.send("invalid");
             }
-
-        } else {
-          res.send("invalid");
-        }
       } else {
         res.send("Admin is not exist");
       }
