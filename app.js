@@ -10,5 +10,5 @@ app.use(allRoutes);
 
 // Menampilkan Koneksi Server
 app.listen(PORT, () => {
-  console.log(`Calcare Server is running at port https://localhost:${PORT}`);
+  console.log(`Calcare Server is running at port http://localhost:${PORT}`);
 });
