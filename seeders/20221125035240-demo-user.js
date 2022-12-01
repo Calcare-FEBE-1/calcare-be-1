@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    queryInterface.bulkInsert("users", [
+    queryInterface.bulkInsert("Users", [
       {
         nama: "Puput",
         email: "puput@gmail.com",
@@ -12,7 +12,7 @@ module.exports = {
         berat_badan: "50",
         umur:"21",
         jenis_kelamin : "perempuan",
-        aktivitas_fisik: "olahraga",
+        aktivitas_fisik: "Jarang olahraga",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -24,7 +24,7 @@ module.exports = {
         berat_badan: "45",
         umur:"22",
         jenis_kelamin : "laki-laki",
-        aktivitas_fisik: "olahraga",
+        aktivitas_fisik: "Sering olahraga",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -36,7 +36,7 @@ module.exports = {
         berat_badan: "65",
         umur:"21",
         jenis_kelamin : "laki-laki",
-        aktivitas_fisik: "olahraga",
+        aktivitas_fisik: "Rutin olahraga",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -44,6 +44,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    queryInterface.bulkDelete("users", null, {});
+    queryInterface.bulkDelete("Users", null, {});
   },
 };

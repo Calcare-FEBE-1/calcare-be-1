@@ -11,7 +11,7 @@ const {
 } = require('../controllers/makananController')
 
 //makanan
-router.get('/', [verifyToken, allowedUser, allowedAdmin], getAllMakanan)
+router.get('/', getAllMakanan)
 //makanan/add
 router.post('/add', [verifyToken, allowedAdmin],addMakanan)
 //makanan/:id

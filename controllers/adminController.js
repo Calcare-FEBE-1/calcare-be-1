@@ -118,6 +118,7 @@ module.exports = {
       });
     } catch (error) {
       res.status(500).json({
+        msg: "Internal Server Error",
         error: error,
       });
     }
