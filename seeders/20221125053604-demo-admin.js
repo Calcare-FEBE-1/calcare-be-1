@@ -5,7 +5,7 @@ const { query } = require("express");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    queryInterface.bulkInsert("admins", [
+    queryInterface.bulkInsert("Admins", [
       {
         nama_admin: "Puput",
         email_admin: "puput@gmail.com",
@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         nama_admin: "Ali",
-        email_admin: "Ali@gmail.com",
+        email_admin: "ali@gmail.com",
         password_admin: "admin3ygy",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -30,6 +30,6 @@ module.exports = {
     ]);
   },
   async down(queryInterface, Sequelize) {
-    queryInterface.bulkDelete("admins", null, {});
+    queryInterface.bulkDelete("Admins", null, {});
   },
 };

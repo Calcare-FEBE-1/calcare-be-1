@@ -1,10 +1,9 @@
 const models = require("../models");
 const { User } = models;
 require("dotenv").config();
-const { generateToken } = require("../middlewares");
 
 // Token
-// const jwt = require("jsonwebtoken");
+const { generateToken } = require("../middlewares");
 const saltRounds = 10;
 const bcrypt = require("bcryptjs");
 
@@ -23,29 +22,39 @@ module.exports = {
       aktivitas_fisik 
     }
     */
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hashPassword = await bcrypt.hash(newUser.password, salt);
     try {
-      // Insert ke DB table users
-      await User.create({
-        nama: newUser.nama,
-        email: newUser.email,
-        password: hashPassword,
-        tinggi_badan: newUser.tinggi_badan,
-        berat_badan: newUser.berat_badan,
-        umur: newUser.umur,
-        jenis_kelamin: newUser.jenis_kelamin,
-        aktivitas_fisik: newUser.aktivitas_fisik,
-      });
-      res.status(201).json({
-        msg: "Register success",
-      });
-      console.log("Register success");
+      const isEmailExist = await User.findOne({ where: { email: newUser.email } });
+      if (isEmailExist === null) {
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hashPassword = await bcrypt.hash(newUser.password, salt);
+        // Insert ke DB table users
+        await User.create({
+          nama: newUser.nama,
+          email: newUser.email,
+          password: hashPassword,
+          tinggi_badan: newUser.tinggi_badan,
+          berat_badan: newUser.berat_badan,
+          umur: newUser.umur,
+          jenis_kelamin: newUser.jenis_kelamin,
+          aktivitas_fisik: newUser.aktivitas_fisik,
+        });
+        res.status(201).json({
+          msg: "Register success",
+        });
+        console.log("Register success");
+      } else if (newUser.email == isEmailExist.email) {
+        res.status(400).json({
+          msg: "Email sudah terdaftar",
+        });
+        res.end();
+        console.log("Email sudah terdaftar");
+      }
     } catch (error) {
       res.status(500).json({
         msg: "Internal Server Error",
+        error: error,
       });
-      console.log("Ada error nih: ", error);
+      console.log("Internal Server Error: ", error);
     }
   },
   // untuk login user yang sudah terdaftar / register
@@ -66,7 +75,7 @@ module.exports = {
           };
           const createToken = generateToken(tokenUser);
           res.status(200).json({
-            message: "Success login as User",
+            msg: "Success login as User",
             token: createToken,
           });
           console.log("Success login as User");
@@ -81,8 +90,11 @@ module.exports = {
         });
       }
     } catch (error) {
-      console.log(error, "Ada error nih");
-      res.status(500).json({ error: error });
+      console.log("Internal Server Error", error);
+      res.status(500).json({
+        msg: "Internal Server Error",
+        error: error,
+      });
     }
   },
 };

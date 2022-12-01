@@ -18,15 +18,24 @@ module.exports = {
       const { id } = req.params;
       const verify = jwt.verify(token.split(" ")[1], SECRET_KEY);
       if (verify) {
-        console.log("Verif token");
+        res.status(200).json({
+          msg: "OK",
+        });
+        console.log("Verified Token");
         next();
       } else {
-        res.status(500).send("invalid token");
+        res.status(406).json({
+          msg: "Invalid token",
+        });
+        console.log("Invalid Token");
         res.end();
       }
     } catch (error) {
-      console.log(error, "error nih");
-      res.status(500).send("error: ", error);
+      res.status(401).json({
+        msg: "Unauthorized",
+        error: error,
+      });
+      console.log("Unauthorized");
       res.end();
     }
   },
@@ -36,14 +45,24 @@ module.exports = {
       const token = req.headers.authorization;
       const verify = jwt.verify(token.split(" ")[1], SECRET_KEY);
       if (verify.data.role === "admin") {
-        console.log("Verif as admin");
+        res.status(200).json({
+          msg: "OK",
+        });
+        console.log("Verified as admin");
         next();
       } else {
-        res.status(500).send("forbidden user");
+        res.status(403).json({
+          msg: "Forbidden Admin",
+        });
+        console.log("Forbidden Admin");
         res.end();
       }
     } catch (error) {
-      res.status(500).send(error);
+      res.status(500).json({
+        msg: "Internal Server Error",
+        error: error,
+      });
+      console.log("Internal Server Error");
       res.end();
     }
   },
@@ -53,14 +72,24 @@ module.exports = {
       const token = req.headers.authorization;
       const verify = jwt.verify(token.split(" ")[1], SECRET_KEY);
       if (verify.data.role === "user") {
-        console.log("Verif as user");
+        res.status(200).json({
+          msg: "OK",
+        });
+        console.log("Verified as user");
         next();
       } else {
-        res.status(500).send("forbidden admin");
+        res.status(403).json({
+          msg: "Forbidden User",
+        });
+        console.log("Forbidden User");
         res.end();
       }
     } catch (error) {
-      res.status(500).send(error);
+      res.status(500).json({
+        msg: "Internal Server Error",
+        error: error,
+      });
+      console.log("Internal Server Error");
       res.end();
     }
   },

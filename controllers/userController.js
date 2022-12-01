@@ -4,19 +4,26 @@ const { User } = models;
 module.exports = {
   // Get all user, diakses oleh admin
   getAllUser: async (req, res) => {
-    const users = await User.findAll();
-    res.json({
-      message: "success get user data",
-      data: users,
-    });
+    try {
+      const users = await User.findAll();
+      res.status(200).json({
+        msg: "Success Get All User",
+        data: users,
+      });
+    } catch (error) {
+      res.status(500).json({
+        msg: "Internal Server Error",
+        error: error,
+      });
+    }
   },
-  // Untuk mengambil data 1 user
+  // Untuk mengambil data user by id, diakses oleh user
   getUserByID: async (req, res) => {
     const { id } = req.params;
     const user = await User.findByPk(id);
 
-    res.json({
-      message: "success get data by id",
+    res.status(200).json({
+      msg: "Success Get User by ID",
       data: user,
     });
   },
@@ -29,10 +36,14 @@ module.exports = {
         },
       });
       res.json({
-        message: "User Update",
+        msg: "Success Update Data User",
       });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      res.status(500).json({
+        msg: "Internal Server Error",
+        error: error,
+      });
+      console.log("Internal Server Error");
     }
   },
   // deleteUserByID: async (req, res) => {
@@ -43,7 +54,7 @@ module.exports = {
   //       },
   //     });
   //     res.json({
-  //       message: "User Deleted",
+  //       msg: "User Deleted",
   //     });
   //   } catch (err) {
   //     console.log(err);

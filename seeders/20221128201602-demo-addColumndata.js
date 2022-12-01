@@ -1,8 +1,8 @@
-'use strict';
+// 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up (queryInterface, Sequelize) {
+// /** @type {import('sequelize-cli').Migration} */
+// module.exports = {
+//   async up (queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -12,17 +12,17 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkUpdate('Users', [{
-      aktivitas_fisik: "olahraga ringan"
-    }], {})
-  },
+  //   await queryInterface.bulkUpdate('Users', [{
+  //     aktivitas_fisik: "olahraga ringan"
+  //   }], {})
+  // },
 
-  async down (queryInterface, Sequelize) {
+  // async down (queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-  }
-};
+//   }
+// };
