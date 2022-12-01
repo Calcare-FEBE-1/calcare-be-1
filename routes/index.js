@@ -7,22 +7,19 @@ const adminRouter = require("./adminRouter");
 const authRouter = require("./authRouter");
 const hasilRouter = require("./hasilRouter");
 const keranjangRouter = require("./keranjangRouter");
+const editMakananRouter = require("./editMakananRouter")
 
 // localhots:3000
 router.get("/", (req, res) => {
   res.send("Welcome to Calcare Homepage");
 });
-// "/auth"   --> Untuk login dan register
+//auth   --> Untuk login dan register
 router.use("/auth", authRouter);
-// "/user"
 router.use("/user", userRouter);
-// "/admin"
 router.use("/admin", adminRouter);
-// "/makanan"
 router.use("/makanan", makananRouter);
-// "/keranjang"
 router.use("/keranjang", keranjangRouter);
-// "/hasil"
+router.use("/edit-makanan", editMakananRouter);
 router.use("/hasil", hasilRouter);
 
 module.exports = router;

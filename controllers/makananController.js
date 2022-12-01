@@ -17,9 +17,9 @@ module.exports = {
     try {
       const makanans = await Makanan.findAll();
       // Untuk mengambil satu atau beberapa data saja
-      makanans.forEach((el, index) => {
-        console.log(makanans[index].nama_makanan);
-      });
+      // makanans.forEach((el, index) => {
+      //   console.log(makanans[index].nama_makanan);
+      // });
       res.status(200).json({
         message: "Berhasil dapat semua makanan",
         data: makanans,
@@ -35,7 +35,6 @@ module.exports = {
     const { id } = req.params;
     try {
       const makanan = await Makanan.findOne({ where: { id: id } });
-      // const user = User.
       if (makanan) {
         console.log("makanan :", makanan);
         Keranjang.create({
@@ -49,14 +48,6 @@ module.exports = {
       } else {
         console.log("Error");
       }
-      // makanan !== null
-      //   ? res.status(200).json({
-      //       msg: "Dapat 1 makanan",
-      //       data: makanan,
-      //     })
-      //   : res.status(404).json({
-      //       msg: `Makanan tidak ditemukan`,
-      //     });
     } catch (error) {
       res.status(404).send({ msg: error });
       console.log(error);
