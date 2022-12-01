@@ -1,92 +1,96 @@
+// Token
 const jwt = require("jsonwebtoken");
-require("dotenv").config({ path: "./.env" });
-const { SECRETKEY } = process.env;
-const generateToken = (data) => {
-
-	const token = jwt.sign({ data }, SECRETKEY, {
-		expiresIn: "1h",
-	});
-	return token;
-};
-const verifyToken = (req, res, next) => {
-	try {
-		const token = req.headers.authorization;
-		const id = req.params.id;
-		const verify = jwt.verify(token.split(" ")[1], SECRETKEY);
-		if (verify) {
-			next();
-		} else {
-			res.status(500).send("invalid token");
-			res.end();
-		}
-	} catch (error) {
-		res.status(500).send("error");
-		res.end();
-	}
-};
-// const dataToken = (req, res) => {
-// 	try {
-// 		const token = req.headers.authorization;
-// 		const verify = jwt.verify(token.split(" ")[1], SECRETKEY);
-// 		return verify;
-// 	} catch (error) {
-// 		console.log("invalid token");
-// 	}
-// };
-// const verifyTokenWithId = (req, res, next) => {
-// 	try {
-// 		const token = req.headers.authorization;
-// 		const id = req.params.id;
-// 		const verify = jwt.verify(token.split(" ")[1], SECRETKEY);
-// 		if (verify.data._id === id) {
-// 			next();
-// 		} else {
-// 			res.status(500).send("forbidden");
-// 			res.end();
-// 		}
-// 	} catch (error) {
-// 		res.status(500).send(error);
-// 		res.end();
-// 	}
-// };
-const allowedAdmin = (req, res, next) => {
-	try {
-		const token = req.headers.authorization;
-		const verify = jwt.verify(token.split(" ")[1], SECRETKEY);
-		if (verify.data.role === "admin") {
-			next();
-		} else {
-			res.status(500).send("forbidden user");
-			res.end();
-		}
-	} catch (error) {
-		res.status(500).send(error);
-		res.end();
-	}
-};
-
-const allowedUser = (req, res, next) => {
-	try {
-		const token = req.headers.authorization;
-		const verify = jwt.verify(token.split(" ")[1], SECRETKEY);
-		if (verify.data.role === "user") {
-			next();
-		} else {
-			res.status(500).send("forbidden admin");
-			res.end();
-		}
-	} catch (error) {
-		res.status(500).send(error);
-		res.end();
-	}
-};
+require("dotenv").config();
+const { SECRET_KEY } = process.env;
 
 module.exports = {
-	generateToken: generateToken,
-	verifyToken: verifyToken,
-	// verifyTokenWithId: verifyTokenWithId,
-	// dataToken: dataToken,
-	allowedAdmin: allowedAdmin,
-	allowedUser: allowedUser,
+  // Function untuk verifikasi token
+  generateToken: (data) => {
+    const token = jwt.sign({ data }, SECRET_KEY, {
+      expiresIn: "1h",
+    });
+    return token;
+  },
+  // Verifikasi token
+  verifyToken: (req, res, next) => {
+    try {
+      const token = req.headers.authorization;
+      const { id } = req.params;
+      const verify = jwt.verify(token.split(" ")[1], SECRET_KEY);
+      if (verify) {
+        res.status(200).json({
+          msg: "OK",
+        });
+        console.log("Verified Token");
+        next();
+      } else {
+        res.status(406).json({
+          msg: "Invalid token",
+        });
+        console.log("Invalid Token");
+        res.end();
+      }
+    } catch (error) {
+      res.status(401).json({
+        msg: "Unauthorized",
+        error: error,
+      });
+      console.log("Unauthorized");
+      res.end();
+    }
+  },
+  // Cek bagian admin
+  allowedAdmin: (req, res, next) => {
+    try {
+      const token = req.headers.authorization;
+      const verify = jwt.verify(token.split(" ")[1], SECRET_KEY);
+      if (verify.data.role === "admin") {
+        res.status(200).json({
+          msg: "OK",
+        });
+        console.log("Verified as admin");
+        next();
+      } else {
+        res.status(403).json({
+          msg: "Forbidden Admin",
+        });
+        console.log("Forbidden Admin");
+        res.end();
+      }
+    } catch (error) {
+      res.status(500).json({
+        msg: "Internal Server Error",
+        error: error,
+      });
+      console.log("Internal Server Error");
+      res.end();
+    }
+  },
+  //   Cek bagian user
+  allowedUser: (req, res, next) => {
+    try {
+      const token = req.headers.authorization;
+      const verify = jwt.verify(token.split(" ")[1], SECRET_KEY);
+      if (verify.data.role === "user") {
+        res.status(200).json({
+          msg: "OK",
+        });
+        console.log("Verified as user");
+        next();
+      } else {
+        res.status(403).json({
+          msg: "Forbidden User",
+        });
+        console.log("Forbidden User");
+        res.end();
+      }
+    } catch (error) {
+      res.status(500).json({
+        msg: "Internal Server Error",
+        error: error,
+      });
+      console.log("Internal Server Error");
+      res.end();
+    }
+  },
 };
-

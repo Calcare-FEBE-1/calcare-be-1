@@ -1,73 +1,100 @@
 const models = require("../models");
 const { User } = models;
+require("dotenv").config();
 
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const env = require('dotenv');
-const { generateToken, verifyToken } = require("../middlewares");
+// Token
+const { generateToken } = require("../middlewares");
+const saltRounds = 10;
+const bcrypt = require("bcryptjs");
 
-
-// untuk register user baru yang belum pernah login / register
-const registerUser = async (req, res) => {
-  const { nama, email, password, tinggi_badan, berat_badan, umur, jenis_kelamin, aktivitas_fisik } = req.body;
-  if (password !== password) return res.status(400).json({ msg: "Password salah" });
-  const salt = await bcrypt.genSalt();
-  const hashPassword = await bcrypt.hash(password, salt);
-  try {
-    await User.create({
-      nama: nama,
-      email: email,
-      password: hashPassword,
-      tinggi_badan: tinggi_badan,
-      berat_badan: berat_badan,
-      umur: umur,
-      jenis_kelamin: jenis_kelamin,
-      aktivitas_fisik: aktivitas_fisik,
-    });
-    res.json({ msg: "Register Berhasil" });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-// untuk login user yang sudah pernah register
-const loginUser = async (req, res) => {
-  try {
-    // Membuat token untuk authorization
-    const token = jwt.sign(
-      {
-        id: User,
-      },
-      KEY
-    );
-    if (User) {
-      res.json({
-        message: "Success login as User",
-        token,
-      });
-    } else {
-      res.send("Your Email or Password incorrect");
+module.exports = {
+  // untuk register user baru yang belum pernah terdaftar
+  registerUser: async (req, res) => {
+    const newUser = req.body;
+    /* newUser berisi { 
+      nama, 
+      email, 
+      password, 
+      tinggi_badan, 
+      berat_badan, 
+      umur, 
+      jenis_kelamin, 
+      aktivitas_fisik 
     }
-    let { email, password } = req.body;
-    const existUseremail = await User.findOne({ where: { email: email } });
-    if (existUseremail !== null) {
-      let compare = bcrypt.compareSync(password, existUseremail.password);
-      if (compare) {
-        const tokenUser = {
-          _id: existUseremail._id,
-          role: "users",
-        };
-        // const createToken = generateToken(tokenUser);
-        res.status(200).send({ message: "welcome" });
-      } else {
-        res.send("invalid");
+    */
+    try {
+      const isEmailExist = await User.findOne({ where: { email: newUser.email } });
+      if (isEmailExist === null) {
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hashPassword = await bcrypt.hash(newUser.password, salt);
+        // Insert ke DB table users
+        await User.create({
+          nama: newUser.nama,
+          email: newUser.email,
+          password: hashPassword,
+          tinggi_badan: newUser.tinggi_badan,
+          berat_badan: newUser.berat_badan,
+          umur: newUser.umur,
+          jenis_kelamin: newUser.jenis_kelamin,
+          aktivitas_fisik: newUser.aktivitas_fisik,
+        });
+        res.status(201).json({
+          msg: "Register success",
+        });
+        console.log("Register success");
+      } else if (newUser.email == isEmailExist.email) {
+        res.status(400).json({
+          msg: "Email sudah terdaftar",
+        });
+        res.end();
+        console.log("Email sudah terdaftar");
       }
-    } else {
-      res.send("user is not exist");
+    } catch (error) {
+      res.status(500).json({
+        msg: "Internal Server Error",
+        error: error,
+      });
+      console.log("Internal Server Error: ", error);
     }
-  } catch (error) {
-    res.status(500).send({ err: error });
-  }
+  },
+  // untuk login user yang sudah terdaftar / register
+  loginUser: async (req, res) => {
+    const { email, password } = req.body;
+    try {
+      // Mengecek email
+      const isUserExist = await User.findOne({ where: { email: email } });
+      if (isUserExist) {
+        // Cek pass : apakah sama ?
+        const compare = bcrypt.compareSync(password, isUserExist.password);
+        if (compare) {
+          // Membuat token untuk authorization
+          const tokenUser = {
+            id: User.id,
+            email: User.email,
+            role: "user",
+          };
+          const createToken = generateToken(tokenUser);
+          res.status(200).json({
+            msg: "Success login as User",
+            token: createToken,
+          });
+          console.log("Success login as User");
+        } else {
+          res.status(401).json({
+            msg: "Your email or password are incorrect",
+          });
+        }
+      } else {
+        res.status(404).json({
+          msg: "User not found",
+        });
+      }
+    } catch (error) {
+      console.log("Internal Server Error", error);
+      res.status(500).json({
+        msg: "Internal Server Error",
+        error: error,
+      });
+    }
+  },
 };
-
-module.exports = { registerUser, loginUser };
