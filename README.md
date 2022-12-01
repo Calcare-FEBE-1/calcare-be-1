@@ -271,6 +271,23 @@ Request :
    "link_gambar": "google.com/tempenih.jpg"
 }
 ```
+- Response :
+```js
+{
+    "msg": "Makanan baru berhasil ditambahkan",
+    "makanan": {
+        "id": 2,
+        "nama_makanan": "Tempe goreng",
+        "kalori": 99,
+        "protein": 250,
+        "lemak": 21,
+        "karbohidrat": 40,
+        "link_gambar": "google.com/tempenih.jpg",
+        "updatedAt": "2022-11-30T14:28:42.339Z",
+        "createdAt": "2022-11-30T14:28:42.339Z"
+    }
+}
+```
 
 ### Get All Makanan 
 Request :
@@ -293,6 +310,10 @@ Request :
   - Accept : application/json
 - Response :
 
+```js
+Berhasil menambahkan makanan ke keranjang
+```
+
 ### Delete Makanan ById
 Request :
 
@@ -307,8 +328,85 @@ Request :
 Request :
 
 - Method : PUT
-- Endpoint : /makanan/id
+- Endpoint : /makanan/edit
 - Header :
   - Content-Type : application/json
   - Accept : application/json
 - Response :
+```js
+{
+    "msg": "Makanan berhasil diperbarui"
+}
+```
+
+# Keranjang Atrributes 
+
+| Atrributes        | Data Type | Description           |
+| ------------------| --------- | --------------------  |
+| id                |           |                       |
+| jmlh_makanan      | Integer   | Jumlah Makanan        |      
+| userId            | Integer   | Id User               |
+| makananId         | Integer   | Id Makanan            |
+
+### Get All Keranjang
+Request :
+
+- Method : GET
+- Endpoint : keranjang
+- Header :
+  - Content-Type : application/json
+  - Accept : application/json
+- Response :
+```js 
+Berhasil dapat semua keranjang
+```
+
+### Get Keranjang ById
+Request :
+
+- Method : GET
+- Endpoint : keranjang/id
+- Header :
+  - Content-Type : application/json
+  - Accept : application/json
+- Response :
+```js 
+Succes Get Keranjang by ID
+```
+
+# Hasil Atrributes 
+
+| Atrributes        | Data Type | Description               |
+| ------------------| --------- | ------------------------  |
+| id                |           |                           |
+| keranjangId       | Integer   | Id Keranjang              |      
+| total_kalori      | Float     | Total Kalori Makanan      |
+| total_protein     | Float     | Total Protein Makanan     |
+| total_karbohidrat | Float     | Total Karbohidrat Makanan |
+| total_lemak       | Float     | Total Lemak Makanan       |
+
+### Hasil Tracking
+Request :
+
+- Method : GET
+- Endpoint : hasil/tracking
+- Header :
+  - Content-Type : application/json
+  - Accept : application/json
+- Response :
+```js 
+
+```
+
+### Hasil Karbon
+Request :
+
+- Method : GET
+- Endpoint : hasil/karbon
+- Header :
+  - Content-Type : application/json
+  - Accept : application/json
+- Response :
+```js 
+
+```
