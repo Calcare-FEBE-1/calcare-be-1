@@ -3,7 +3,8 @@ module.exports = {
       res.send("Dapat semua hasil")
       
     },
-    getHasilByID: async (req, res) => {
+  getHasilByID: async (req, res) => {
+      
     },
     deleteHasilByID: async (req, res) => {
       

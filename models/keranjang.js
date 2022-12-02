@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // Relasi dengan table users
-      this.belongsTo(models.User);
+      // this.belongsTo(models.User);
+      models.User.hasOne(Keranjang);
     }
   }
   Keranjang.init(

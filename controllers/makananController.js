@@ -67,6 +67,9 @@ module.exports = {
           id: req.params.id,
         },
       });
+      res.status(200).json({
+        msg: "Makanan was deleted",
+      });
     } catch (error) {
       res.status(404).send({ msg: error });
       console.log(error);
