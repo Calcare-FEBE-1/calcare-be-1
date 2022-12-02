@@ -3,21 +3,22 @@ const app = express();
 const allRoutes = require("./routes");
 const PORT = process.env.PORT || 3000;
 const cors = require("cors");
+// Koneksi dengan FE
+// const corsConfig = {
+//   origin: "https://testing-calcare.up.railway.app/",
+//   credentials: true,
+// };
+// app.options("*", cors(corsConfig));
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   next();
+// });
+// app.use(cors(corsConfig));
+app.use(cors());
+
 // Middleware
 app.use(express.json());
 app.use(allRoutes);
-
-// Koneksi dengan FE
-const corsConfig = {
-  origin: "https://testing-calcare.up.railway.app/",
-  credentials: true,
-};
-app.use(cors(corsConfig));
-app.options("*", cors(corsConfig));
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
 
 // Menampilkan Koneksi Server
 app.listen(PORT, () => {
