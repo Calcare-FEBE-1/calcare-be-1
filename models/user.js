@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       umur: DataTypes.STRING,
       jenis_kelamin: DataTypes.STRING,
       aktivitas_fisik: DataTypes.STRING,
+      kebutuhanKalori: DataTypes.REAL,
+      kebutuhanLemak: DataTypes.REAL,
+      kebutuhanProtein: DataTypes.REAL,
+      kebutuhanKarbohidrat: DataTypes.REAL,
     },
     {
       sequelize,

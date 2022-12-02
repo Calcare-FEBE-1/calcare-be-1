@@ -10,7 +10,6 @@ const bcrypt = require("bcryptjs");
 module.exports = {
   // untuk register user baru yang belum pernah terdaftar
   registerUser: async (req, res) => {
-    const newUser = req.body;
     /* newUser berisi { 
       nama, 
       email, 
@@ -23,8 +22,42 @@ module.exports = {
     }
     */
     try {
+      const newUser = req.body;
+      let aktivitas_fisik = Number(newUser.aktivitas_fisik);
+      let keterangan = "";
+      // Cek email apakah sudah ada ?
       const isEmailExist = await User.findOne({ where: { email: newUser.email } });
       if (isEmailExist === null) {
+        // konversi aktivitas fisik ke number
+        switch (aktivitas_fisik) {
+          case 1.2:
+            keterangan = "Tidak Pernah Berolahraga";
+            break;
+          case 1.3:
+            keterangan = "Jarang Berolahraga";
+            break;
+          case 1.4:
+            keterangan = "Sering Berolahraga";
+            break;
+          default:
+            keterangan = "Tidak ada aktivitas fisik";
+            break;
+        }
+        aktivitas_fisik = {
+          keterangan: keterangan,
+          nilai: aktivitas_fisik,
+        };
+        let bmr = 0;
+        if (newUser.jenis_kelamin === "Laki") {
+          bmr = 665 + 13.7 * berat + 5 * tinggi - 6.8 * umur;
+        } else {
+          bmr = 655 + 9.6 * berat + 1.8 * tinggi - 4.7 * umur;
+        }
+        let kebutuhanKalori = bmr * aktivitas_fisik.nilai;
+        let kebutuhanLemak = kebutuhanKalori * 0.25;
+        let kebutuhanProtein = kebutuhanKalori * 0.15;
+        let kebutuhanKarbohidrat = kebutuhanKalori * 0.75;
+
         const salt = await bcrypt.genSalt(saltRounds);
         const hashPassword = await bcrypt.hash(newUser.password, salt);
         // Insert ke table users
@@ -37,6 +70,10 @@ module.exports = {
           umur: newUser.umur,
           jenis_kelamin: newUser.jenis_kelamin,
           aktivitas_fisik: newUser.aktivitas_fisik,
+          kebutuhanKalori: kebutuhanKalori,
+          kebutuhanLemak: kebutuhanLemak,
+          kebutuhanProtein: kebutuhanProtein,
+          kebutuhanKarbohidrat: kebutuhanKarbohidrat,
         });
         res.status(201).json({
           msg: "Register success",
