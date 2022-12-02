@@ -55,7 +55,7 @@ module.exports = {
         console.log(error);
       }
     } catch (error) {
-      res.status(404).send({ msg: error });
+      // res.status(404).send({ msg: error });
       console.log(error);
     }
   },
