@@ -59,7 +59,7 @@ module.exports = {
         }
       } else {
         res.status(404).json({
-          msg: "User not found",
+          msg: "Admin not found",
         });
       }
     } catch (error) {

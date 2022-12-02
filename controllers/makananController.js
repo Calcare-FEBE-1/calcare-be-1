@@ -45,11 +45,14 @@ module.exports = {
           updatedAt: new Date(),
         });
         res.status(201).json({
-          msg: "berhasil menambahkan makanan ke keranjang"
+          msg: "Berhasil menambahkan makanan ke keranjang",
+          data: makanan,
         });
       } else {
-        res.send("makanan tidak di temukan")
-        console.log("Error");
+        res.status(404).json({
+          msg: "Makanan tidak ada",
+        });
+        console.log(error);
       }
     } catch (error) {
       // res.status(404).send({ msg: error });
@@ -63,6 +66,9 @@ module.exports = {
         where: {
           id: req.params.id,
         },
+      });
+      res.status(200).json({
+        msg: "Makanan was deleted",
       });
     } catch (error) {
       res.status(404).send({ msg: error });

@@ -9,7 +9,7 @@ const hasilRouter = require("./hasilRouter");
 const keranjangRouter = require("./keranjangRouter");
 const editMakananRouter = require("./editMakananRouter")
 
-// localhots:3000
+// localhots:${PORT}
 router.get("/", (req, res) => {
   res.send("Welcome to Calcare Homepage");
 });

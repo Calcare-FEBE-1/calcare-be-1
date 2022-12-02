@@ -1,17 +1,12 @@
 const models = require("../models");
-const { Keranjang, User } = models;
+const { Keranjang, User, Hasil } = models;
 
 module.exports = {
   getAllKeranjang: async (req, res) => {
     try {
       const keranjangs = await Keranjang.findAll({ include: User });
-      // Untuk mengambil satu atau beberapa data saja
-      //   makanans.forEach((el, index) => {
-      //     console.log(keranjangs[index].nama_makanan);
-      //   });
-      // console.log("Udah di sini");
       res.status(200).json({
-        message: "Berhasil dapat semua keranjang",
+        msg: "Berhasil dapat semua keranjang",
         data: keranjangs,
       });
     } catch (error) {
@@ -22,16 +17,30 @@ module.exports = {
     }
   },
   getKeranjangByUserID: async (req, res) => {
-    const { id } = req.params;
+    const id = req.params.id;
     try {
-      const keranjang = await Keranjang.findOne({ where: { id: id } }, { include: User });
+      const keranjang = await Keranjang.findAll({
+        where: {
+          userID: id,
+        },
+      });
+      if (keranjang) {
+        
+      }
+      console.log(keranjang);
+      keranjang.forEach((el, index) => {
+        console.log(keranjang[index].makananId);
+      });
       res.status(200).send({
         msg: "Succes Get Keranjang by ID ",
         keranjang: keranjang,
       });
+      // Perhitungan kalori ada di sini
+      console.log(keranjang);
     } catch (error) {
       res.status(404).send({
-        msg: error,
+        msg: "Not Found",
+        error,
       });
     }
   },

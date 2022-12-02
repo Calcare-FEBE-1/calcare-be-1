@@ -18,11 +18,8 @@ module.exports = {
       const { id } = req.params;
       const verify = jwt.verify(token.split(" ")[1], SECRET_KEY);
       if (verify) {
-        // res.status(200).json({
-        //   msg: "OK",
-        // });
-        console.log("Verified Token");
         next();
+        // console.log("Verified Token");
       } else {
         res.status(406).json({
           msg: "Invalid token",
@@ -45,11 +42,8 @@ module.exports = {
       const token = req.headers.authorization;
       const verify = jwt.verify(token.split(" ")[1], SECRET_KEY);
       if (verify.data.role === "admin") {
-        // res.status(200).json({
-        //   msg: "OK",
-        // });
-        console.log("Verified as admin");
         next();
+        // console.log("Verified as admin");
       } else {
         res.status(403).json({
           msg: "Forbidden Admin",
@@ -72,11 +66,8 @@ module.exports = {
       const token = req.headers.authorization;
       const verify = jwt.verify(token.split(" ")[1], SECRET_KEY);
       if (verify.data.role === "user") {
-        // res.status(200).json({
-        //   msg: "OK",
-        // });
-        console.log("Verified as user");
         next();
+        // console.log("Verified as user");
       } else {
         res.status(403).json({
           msg: "Forbidden User",

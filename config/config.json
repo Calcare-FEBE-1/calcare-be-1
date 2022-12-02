@@ -1,10 +1,10 @@
-
 {
   "development": {
     "username": "root",
-    "password": "Mptftm024@",
-    "database": "calcare_dev",
-    "host": "127.0.0.1",
+    "password": "62Vpsy2SFLUIt1orZDfC",
+    "database": "railway",
+    "port": 7579,
+    "host": "containers-us-west-90.railway.app",
     "dialect": "mysql"
   },
   "test": {
