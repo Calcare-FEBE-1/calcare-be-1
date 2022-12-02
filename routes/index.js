@@ -5,7 +5,7 @@ const makananRouter = require("./makananRouter");
 const userRouter = require("./userRouter");
 const adminRouter = require("./adminRouter");
 const authRouter = require("./authRouter");
-const hasilRouter = require("./hasilRouter");
+// const hasilRouter = require("./hasilRouter");
 const keranjangRouter = require("./keranjangRouter");
 const editMakananRouter = require("./editMakananRouter")
 
@@ -20,6 +20,6 @@ router.use("/admin", adminRouter);
 router.use("/makanan", makananRouter);
 router.use("/keranjang", keranjangRouter);
 router.use("/edit-makanan", editMakananRouter);
-router.use("/hasil", hasilRouter);
+// router.use("/hasil", hasilRouter);
 
 module.exports = router;

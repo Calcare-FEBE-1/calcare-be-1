@@ -27,7 +27,7 @@ module.exports = {
       if (isEmailExist === null) {
         const salt = await bcrypt.genSalt(saltRounds);
         const hashPassword = await bcrypt.hash(newUser.password, salt);
-        // Insert ke DB table users
+        // Insert ke table users
         await User.create({
           nama: newUser.nama,
           email: newUser.email,

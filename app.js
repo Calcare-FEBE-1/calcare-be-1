@@ -6,15 +6,21 @@ const cors = require("cors");
 // Middleware
 app.use(express.json());
 app.use(allRoutes);
-app.use(cors());
+
+// Koneksi dengan FE
+const corsConfig = {
+  credentials: true,
+};
+app.use(cors(corsConfig));
+app.options("*", cors(corsConfig));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 // Menampilkan Koneksi Server
 app.listen(PORT, () => {
-<<<<<<< HEAD
-  console.log(`Calcare-febe-1 server is running at port http://localhost:${PORT}`);
-=======
   console.log(`Calcare Server is running at port http://localhost:${PORT}`);
->>>>>>> dev
 });
 
 /* Ini local
@@ -25,7 +31,6 @@ app.listen(PORT, () => {
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
-
   Ini Railway
   "development":{
     "username": "root",

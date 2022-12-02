@@ -1,8 +1,7 @@
 module.exports = {
-
-    getAllHasil: async (req, res) => {
+    // getAllHasil: async (req, res) => {
       
-    },
+    // },
     getHasilByID: async (req, res) => {
       
     },

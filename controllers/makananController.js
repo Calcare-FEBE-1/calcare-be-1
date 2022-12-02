@@ -44,9 +44,15 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         });
-        res.send("Berhasil menambahkan makanan ke keranjang")
+        res.status(201).json({
+          msg: "Berhasil menambahkan makanan ke keranjang",
+          data: makanan,
+        });
       } else {
-        console.log("Error");
+        res.status(404).json({
+          msg: "Makanan tidak ada",
+        });
+        console.log(error);
       }
     } catch (error) {
       res.status(404).send({ msg: error });

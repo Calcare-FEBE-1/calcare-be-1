@@ -1,20 +1,11 @@
 const models = require("../models");
 const { Admin } = models;
-<<<<<<< HEAD
-
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const env = require("dotenv");
-const { generateToken, verifyToken } = require("../middlewares");
-const { res_error, res_success } = require("../Response");
-=======
 require("dotenv").config();
 // Token
 // const jwt = require("jsonwebtoken");
 const { generateToken } = require("../middlewares");
 const saltRounds = 10;
 const bcrypt = require("bcryptjs");
->>>>>>> dev
 
 module.exports = {
   // Menambahkan admin oleh admin lain
@@ -68,7 +59,7 @@ module.exports = {
         }
       } else {
         res.status(404).json({
-          msg: "User not found",
+          msg: "Admin not found",
         });
       }
     } catch (error) {

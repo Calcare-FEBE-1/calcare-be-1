@@ -11,9 +11,9 @@ router.get("/:id", [verifyToken, allowedAdmin], getAdminByID);
 router.delete("/:id", [verifyToken, allowedAdmin], deleteAdminByID);
 //admin/:id
 router.put("/:id", [verifyToken, allowedAdmin], updateAdminByID);
-//register Admin
+//admin/add
 router.post("/add", [verifyToken, allowedAdmin], addAdmin);
-//login admin
+//admin/login
 router.post("/login", loginAdmin);
 
 module.exports = router;
