@@ -49,6 +49,22 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
+      kebutuhanKalori: {
+        allowNull: false,
+        type: Sequelize.REAL,
+      },
+      kebutuhanLemak: {
+        allowNull: false,
+        type: Sequelize.REAL,
+      },
+      kebutuhanProtein: {
+        allowNull: false,
+        type: Sequelize.REAL,
+      },
+      kebutuhanKarbohidrat: {
+        allowNull: false,
+        type: Sequelize.REAL,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
