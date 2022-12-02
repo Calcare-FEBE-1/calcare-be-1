@@ -18,9 +18,9 @@ module.exports = {
       const { id } = req.params;
       const verify = jwt.verify(token.split(" ")[1], SECRET_KEY);
       if (verify) {
-        res.status(200).json({
-          msg: "OK",
-        });
+        // res.status(200).json({
+        //   msg: "OK",
+        // });
         console.log("Verified Token");
         next();
       } else {
@@ -45,9 +45,9 @@ module.exports = {
       const token = req.headers.authorization;
       const verify = jwt.verify(token.split(" ")[1], SECRET_KEY);
       if (verify.data.role === "admin") {
-        res.status(200).json({
-          msg: "OK",
-        });
+        // res.status(200).json({
+        //   msg: "OK",
+        // });
         console.log("Verified as admin");
         next();
       } else {
@@ -72,9 +72,9 @@ module.exports = {
       const token = req.headers.authorization;
       const verify = jwt.verify(token.split(" ")[1], SECRET_KEY);
       if (verify.data.role === "user") {
-        res.status(200).json({
-          msg: "OK",
-        });
+        // res.status(200).json({
+        //   msg: "OK",
+        // });
         console.log("Verified as user");
         next();
       } else {
