@@ -14,7 +14,7 @@ const corsConfig = {
 };
 app.use(cors(corsConfig));
 app.options("*", cors(corsConfig));
-app.use((req, res, next) => {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
