@@ -8,7 +8,7 @@ Link Testing :  https://testing-calcare.up.railway.app/
 
 | Atrributes     | Data Type | Description           |
 | -------------- | --------- | --------------------  |
-| id             |           |                       |
+| id             | ObjectId  | User Id               |
 | nama           | String    | User Nama             |      
 | email          | String    | User Email            |
 | password       | String    | User Password         |
@@ -188,7 +188,7 @@ Request :
 
 | Atrributes        | Data Type | Description           |
 | ------------------| --------- | --------------------  |
-| id                |           |                       |
+| id                | ObjectId  | Admin Id              |
 | nama_admin        | String    | Admin Nama            |      
 | email_admin       | String    | Admin Email           |
 | password_admin    | String    | Admin Password        |
@@ -244,7 +244,7 @@ Request :
 
 | Atrributes        | Data Type | Description           |
 | ------------------| --------- | --------------------  |
-| id                |           |                       |
+| id                | ObjectId  | Makanan Id            |
 | nama_makanan      | String    | Nama Makanan          |      
 | kalori            | Float     | Kalori Makanan        |
 | protein           | Float     | Protein Makanan       |
@@ -391,7 +391,7 @@ Request :
 
 | Atrributes        | Data Type | Description           |
 | ------------------| --------- | --------------------  |
-| id                |           |                       |
+| id                | ObjectId  | Keranjang Id          |
 | jmlh_makanan      | Integer   | Jumlah Makanan        |      
 | userId            | Integer   | Id User               |
 | makananId         | Integer   | Id Makanan            |
@@ -540,7 +540,7 @@ Succes Get Keranjang by ID
 
 | Atrributes        | Data Type | Description               |
 | ------------------| --------- | ------------------------  |
-| id                |           |                           |
+| id                | ObjectId  | Id Hasil                  |
 | keranjangId       | Integer   | Id Keranjang              |      
 | total_kalori      | Float     | Total Kalori Makanan      |
 | total_protein     | Float     | Total Protein Makanan     |
