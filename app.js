@@ -9,7 +9,7 @@ app.use(allRoutes);
 
 // Koneksi dengan FE
 const corsConfig = {
-  origin: "http://localhost:3000",
+  origin: "https://testing-calcare.up.railway.app/",
   credentials: true,
 };
 app.use(cors(corsConfig));
