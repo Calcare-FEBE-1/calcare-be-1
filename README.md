@@ -1,5 +1,6 @@
 # calcare-be-1
-This is an repo for final project. This project is homemade by FEBE-1 Team. Enjoy my website.
+This is an repo for final project. This project is homemade by FEBE-1 Team. Enjoy my website.</br>
+Link Testing :  https://testing-calcare.up.railway.app/ 
 
 # API Specification
 
@@ -14,15 +15,15 @@ This is an repo for final project. This project is homemade by FEBE-1 Team. Enjo
 | tinggi_badan   | Integer   | Tinggi badan User     |  
 | berat_badan    | Integer   | Berat Badan User      |
 | umur           | String    | Umur User             |
-| aktivitas_fisik| String    | User Aktivitas        |
+| aktivitas_fisik| String    |Aktivitas User     |
 | jenis_kelamin  | String    | Jenis Kelamin User    |
 
-### Register
+##   Register
 
 Request :
 
 - Method : POST
-- Endpoint : /auth/register
+- Endpoint :  link-testing/auth/register-user 
 - Header :
   - Content-Type : application/json
   - Accept : application/json
@@ -47,12 +48,12 @@ Request :
   "msg": "Register Berhasil"
 }
 ```
-### Login
+## Login
 
 Request :
 
 - Method : POST
-- Endpoint : /auth/login
+- Endpoint : link-testing/auth/login-user 
 - Header :
   - Content-Type : application/json
   - Accept : application/json
@@ -72,7 +73,7 @@ Request :
 }
 ```
 
-### Get All User
+## Get All User
 Request :
 
 - Method : GET
@@ -127,7 +128,7 @@ Request :
   ]
 }
 ```
-### Get User ByID
+## Get User ByID
 Request :
 
 - Method : GET
@@ -154,7 +155,7 @@ Request :
   }
 }
 ```
-### Delete User ByID
+## Delete User ByID
 Request :
 
 - Method : DELETE
@@ -168,7 +169,7 @@ Request :
   "message": "User Deleted"
 }
 ```
-### Update User ByID
+## Update User ByID
 Request :
 
 - Method : PUT
@@ -192,12 +193,12 @@ Request :
 | email_admin       | String    | Admin Email           |
 | password_admin    | String    | Admin Password        |
 
-### Register Admin
+## Add Admin (oleh Admin lain)
 
 Request :
 
 - Method : POST
-- Endpoint : /admin/register
+- Endpoint :  link-testing/admin/add
 - Header :
   - Content-Type : application/json
   - Accept : application/json
@@ -215,12 +216,12 @@ Request :
   "msg": "Register Berhasil"
 }
 ```
-### Login Admin
+## Login Admin
 
 Request :
 
 - Method : POST
-- Endpoint : /admin/login
+- Endpoint : link-testing/admin/login
 - Header :
   - Content-Type : application/json
   - Accept : application/json
@@ -252,11 +253,11 @@ Request :
 | link_gambar       | Text      | Gambar Makanan        |
 
 
-### Add Makanan 
+## Add Makanan (oleh admin)
 Request :
 
 - Method : POST
-- Endpoint : /makanan/add
+- Endpoint :  link-testing/makanan/add
 - Header :
   - Content-Type : application/json
   - Accept : application/json
@@ -289,46 +290,93 @@ Request :
 }
 ```
 
-### Get All Makanan 
+## Get All Makanan 
 Request :
 
 - Method : GET
-- Endpoint : /makanan
+- Endpoint : link-testing/makanan
 - Header :
   - Content-Type : application/json
   - Accept : application/json
 - Response :
+```js
+{
+    "message": "Berhasil dapat semua makanan",
+    "data": [
+        {
+            "id": 1,
+            "nama_makanan": "Tempe goreng",
+            "kalori": 99,
+            "protein": 250,
+            "lemak": 21,
+            "karbohidrat": 40,
+            "link_gambar": "google.com/tempenih.jpg",
+            "createdAt": "2022-11-30T03:13:57.000Z",
+            "updatedAt": "2022-11-30T03:13:57.000Z"
+        },
+        {
+            "id": 2,
+            "nama_makanan": "Tempe goreng",
+            "kalori": 99,
+            "protein": 250,
+            "lemak": 21,
+            "karbohidrat": 40,
+            "link_gambar": "google.com/tempenih.jpg",
+            "createdAt": "2022-11-30T14:28:42.000Z",
+            "updatedAt": "2022-11-30T14:28:42.000Z"
+        }
+    ]
+}
+```
 
 
-### Get Makanan ById
+## Get Makanan ById
 Request :
 
 - Method : GET
-- Endpoint : /makanan/id
+- Endpoint : link-testing/makanan/:id 
 - Header :
   - Content-Type : application/json
   - Accept : application/json
 - Response :
 
 ```js
-Berhasil menambahkan makanan ke keranjang
+
+"message": "Berhasil menambahkan makanan ke keranjang",
+    "data": [
+        {
+            "id": 1,
+            "nama_makanan": "Tempe goreng",
+            "kalori": 99,
+            "protein": 250,
+            "lemak": 21,
+            "karbohidrat": 40,
+            "link_gambar": "google.com/tempenih.jpg",
+            "createdAt": "2022-11-30T03:13:57.000Z",
+            "updatedAt": "2022-11-30T03:13:57.000Z"
+        },
 ```
 
-### Delete Makanan ById
+## Delete Makanan ById
 Request :
 
 - Method : DELETE
-- Endpoint : /makanan/id
+- Endpoint : link-testing/makanan/:id
 - Header :
   - Content-Type : application/json
   - Accept : application/json
 - Response :
+```js
+{
+    "msg": "OK"
+}
+```
 
-### Update Makanan ById
+## Update Makanan ById
 Request :
 
 - Method : PUT
-- Endpoint : /makanan/edit
+- Endpoint : link-testing/makanan/:id 
 - Header :
   - Content-Type : application/json
   - Accept : application/json
@@ -348,24 +396,138 @@ Request :
 | userId            | Integer   | Id User               |
 | makananId         | Integer   | Id Makanan            |
 
-### Get All Keranjang
+## Get All Keranjang (oleh admin)
 Request :
 
 - Method : GET
-- Endpoint : keranjang
+- Endpoint :  link-testing/keranjang
 - Header :
   - Content-Type : application/json
   - Accept : application/json
 - Response :
 ```js 
-Berhasil dapat semua keranjang
+{
+    "message": "Berhasil dapat semua keranjang",
+    "data": [
+        {
+            "id": 3,
+            "jmlh_makanan": 1,
+            "userId": 1,
+            "makananId": 1,
+            "createdAt": "2022-12-01T11:39:21.000Z",
+            "updatedAt": "2022-12-01T11:39:21.000Z",
+            "UserId": 1,
+            "User": {
+                "id": 1,
+                "nama": "Puput",
+                "email": "puput@gmail.com",
+                "password": "12345",
+                "tinggi_badan": 150,
+                "berat_badan": 50,
+                "umur": 21,
+                "jenis_kelamin": "perempuan",
+                "aktivitas_fisik": "olahraga",
+                "createdAt": "2022-11-28T02:39:11.000Z",
+                "updatedAt": "2022-11-28T02:39:11.000Z"
+            }
+        },
+        {
+            "id": 4,
+            "jmlh_makanan": 1,
+            "userId": 1,
+            "makananId": 1,
+            "createdAt": "2022-12-01T16:19:08.000Z",
+            "updatedAt": "2022-12-01T16:19:08.000Z",
+            "UserId": 1,
+            "User": {
+                "id": 1,
+                "nama": "Puput",
+                "email": "puput@gmail.com",
+                "password": "12345",
+                "tinggi_badan": 150,
+                "berat_badan": 50,
+                "umur": 21,
+                "jenis_kelamin": "perempuan",
+                "aktivitas_fisik": "olahraga",
+                "createdAt": "2022-11-28T02:39:11.000Z",
+                "updatedAt": "2022-11-28T02:39:11.000Z"
+            }
+        },
+        {
+            "id": 5,
+            "jmlh_makanan": 1,
+            "userId": 1,
+            "makananId": 1,
+            "createdAt": "2022-12-01T16:21:46.000Z",
+            "updatedAt": "2022-12-01T16:21:46.000Z",
+            "UserId": 1,
+            "User": {
+                "id": 1,
+                "nama": "Puput",
+                "email": "puput@gmail.com",
+                "password": "12345",
+                "tinggi_badan": 150,
+                "berat_badan": 50,
+                "umur": 21,
+                "jenis_kelamin": "perempuan",
+                "aktivitas_fisik": "olahraga",
+                "createdAt": "2022-11-28T02:39:11.000Z",
+                "updatedAt": "2022-11-28T02:39:11.000Z"
+            }
+        },
+        {
+            "id": 6,
+            "jmlh_makanan": 1,
+            "userId": 2,
+            "makananId": 2,
+            "createdAt": "2022-12-01T16:29:10.000Z",
+            "updatedAt": "2022-12-01T16:29:10.000Z",
+            "UserId": 2,
+            "User": {
+                "id": 2,
+                "nama": "ilham",
+                "email": "ilham@gmail.com",
+                "password": "222344",
+                "tinggi_badan": 160,
+                "berat_badan": 45,
+                "umur": 22,
+                "jenis_kelamin": "laki-laki",
+                "aktivitas_fisik": "olahraga",
+                "createdAt": "2022-11-28T02:39:11.000Z",
+                "updatedAt": "2022-11-28T02:39:11.000Z"
+            }
+        },
+        {
+            "id": 7,
+            "jmlh_makanan": 1,
+            "userId": 2,
+            "makananId": 2,
+            "createdAt": "2022-12-01T16:29:17.000Z",
+            "updatedAt": "2022-12-01T16:29:17.000Z",
+            "UserId": 2,
+            "User": {
+                "id": 2,
+                "nama": "ilham",
+                "email": "ilham@gmail.com",
+                "password": "222344",
+                "tinggi_badan": 160,
+                "berat_badan": 45,
+                "umur": 22,
+                "jenis_kelamin": "laki-laki",
+                "aktivitas_fisik": "olahraga",
+                "createdAt": "2022-11-28T02:39:11.000Z",
+                "updatedAt": "2022-11-28T02:39:11.000Z"
+            }
+        }
+    ]
+}
 ```
 
-### Get Keranjang ById
+## Get Keranjang ById
 Request :
 
 - Method : GET
-- Endpoint : keranjang/id
+- Endpoint :  link-testing/keranjang/:id
 - Header :
   - Content-Type : application/json
   - Accept : application/json
@@ -385,11 +547,11 @@ Succes Get Keranjang by ID
 | total_karbohidrat | Float     | Total Karbohidrat Makanan |
 | total_lemak       | Float     | Total Lemak Makanan       |
 
-### Hasil Tracking
+## Get All Hasil (oleh admin)
 Request :
 
 - Method : GET
-- Endpoint : hasil/tracking
+- Endpoint : 
 - Header :
   - Content-Type : application/json
   - Accept : application/json
@@ -398,11 +560,23 @@ Request :
 
 ```
 
-### Hasil Karbon
+## Get Hasil ById
 Request :
 
 - Method : GET
-- Endpoint : hasil/karbon
+- Endpoint :  link-testing/hasil/:id
+- Header :
+  - Content-Type : application/json
+  - Accept : application/json
+- Response :
+```js 
+
+```
+## Update Hasil ById
+Request :
+
+- Method : PUT
+- Endpoint :  link-testing/hasil/:id 
 - Header :
   - Content-Type : application/json
   - Accept : application/json

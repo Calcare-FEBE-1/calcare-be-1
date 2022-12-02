@@ -15,7 +15,7 @@ router.get('/', getAllMakanan)
 //makanan/add
 router.post('/add', [verifyToken, allowedAdmin],addMakanan)
 //makanan/:id
-router.get('/:id', [verifyToken, allowedAdmin], getMakananByID)
+router.get('/:id', [verifyToken], getMakananByID)
 //makanan/:id
 router.put('/:id',[verifyToken, allowedAdmin], updateMakananByID)
 //makanan/:id
